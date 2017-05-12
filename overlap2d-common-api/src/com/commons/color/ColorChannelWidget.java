@@ -36,15 +36,16 @@ import com.kotcrab.vis.ui.widget.color.ColorPickerStyle;
 
 /**
  * Used to display one color channel (hue, saturation etc.) with label, ColorInputField and ChannelBar
+ *
  * @author Kotcrab
  */
 public class ColorChannelWidget extends VisTable implements Disposable {
-	private ColorPickerStyle style;
-	private Sizes sizes;
-	private int value;
-	private int maxValue;
-	public ColorChannelWidgetListener drawer;
-	private boolean useAlpha;
+    private ColorPickerStyle style;
+    private Sizes sizes;
+    private int value;
+    private int maxValue;
+    public ColorChannelWidgetListener drawer;
+    private boolean useAlpha;
 
     private ColorInputField inputField;
 
@@ -54,84 +55,84 @@ public class ColorChannelWidget extends VisTable implements Disposable {
 
     private ChangeListener barListener;
 
-	public ColorChannelWidget (ColorPickerStyle style, Sizes sizes, String label, int maxValue, final ColorChannelWidgetListener drawer) {
-		this(style, sizes, label, maxValue, false, drawer);
-	}
+    public ColorChannelWidget(ColorPickerStyle style, Sizes sizes, String label, int maxValue, final ColorChannelWidgetListener drawer) {
+        this(style, sizes, label, maxValue, false, drawer);
+    }
 
-	public ColorChannelWidget (ColorPickerStyle style, Sizes sizes, String label, int maxValue, boolean useAlpha, final ColorChannelWidgetListener drawer) {
-		super(true);
+    public ColorChannelWidget(ColorPickerStyle style, Sizes sizes, String label, int maxValue, boolean useAlpha, final ColorChannelWidgetListener drawer) {
+        super(true);
 
-		this.style = style;
-		this.sizes = sizes;
-		this.value = 0;
-		this.maxValue = maxValue;
-		this.drawer = drawer;
-		this.useAlpha = useAlpha;
+        this.style = style;
+        this.sizes = sizes;
+        this.value = 0;
+        this.maxValue = maxValue;
+        this.drawer = drawer;
+        this.useAlpha = useAlpha;
 
         barListener = new ChangeListener() {
             @Override
-            public void changed (ChangeEvent event, Actor actor) {
+            public void changed(ChangeEvent event, Actor actor) {
                 value = bar.getValue();
                 drawer.updateFields();
                 inputField.setValue(value);
             }
         };
 
-		if (useAlpha)
-			pixmap = new Pixmap(maxValue, 1, Pixmap.Format.RGBA8888);
-		else
-			pixmap = new Pixmap(maxValue, 1, Pixmap.Format.RGB888);
+        if (useAlpha)
+            pixmap = new Pixmap(maxValue, 1, Pixmap.Format.RGBA8888);
+        else
+            pixmap = new Pixmap(maxValue, 1, Pixmap.Format.RGB888);
 
-		texture = new Texture(pixmap);
-		add(new VisLabel(label)).width(10 * sizes.scaleFactor).center();
-		add(inputField = new ColorInputField(maxValue, new ColorInputField.ColorInputFieldListener() {
-			@Override
-			public void changed (int newValue) {
-				value = newValue;
-				drawer.updateFields();
-				bar.setValue(newValue);
-			}
-		})).width(CustomColorPicker.FIELD_WIDTH * sizes.scaleFactor);
-		add(bar = createBarImage()).size(CustomColorPicker.BAR_WIDTH * sizes.scaleFactor, CustomColorPicker.BAR_HEIGHT * sizes.scaleFactor);
+        texture = new Texture(pixmap);
+        add(new VisLabel(label)).width(10 * sizes.scaleFactor).center();
+        add(inputField = new ColorInputField(maxValue, new ColorInputField.ColorInputFieldListener() {
+            @Override
+            public void changed(int newValue) {
+                value = newValue;
+                drawer.updateFields();
+                bar.setValue(newValue);
+            }
+        })).width(CustomColorPicker.FIELD_WIDTH * sizes.scaleFactor);
+        add(bar = createBarImage()).size(CustomColorPicker.BAR_WIDTH * sizes.scaleFactor, CustomColorPicker.BAR_HEIGHT * sizes.scaleFactor);
 
         inputField.setValue(0);
     }
 
     @Override
-    public void dispose () {
+    public void dispose() {
         pixmap.dispose();
         texture.dispose();
     }
 
-    public void redraw () {
+    public void redraw() {
         drawer.draw(pixmap);
         texture.draw(pixmap, 0, 0);
     }
 
-    public int getValue () {
+    public int getValue() {
         return value;
     }
 
-    public void setValue (int value) {
+    public void setValue(int value) {
         this.value = value;
         inputField.setValue(value);
         bar.setValue(value);
     }
 
-	private ChannelBar createBarImage () {
-		if (useAlpha)
-			return new AlphaChannelBar(style, sizes, texture, value, maxValue, barListener);
-		else
-			return new ChannelBar(style, sizes, texture, value, maxValue, barListener);
-	}
+    private ChannelBar createBarImage() {
+        if (useAlpha)
+            return new AlphaChannelBar(style, sizes, texture, value, maxValue, barListener);
+        else
+            return new ChannelBar(style, sizes, texture, value, maxValue, barListener);
+    }
 
-    public boolean isInputValid () {
+    public boolean isInputValid() {
         return inputField.isInputValid();
     }
 
-	interface ColorChannelWidgetListener {
-		void updateFields ();
+    interface ColorChannelWidgetListener {
+        void updateFields();
 
-		void draw (Pixmap pixmap);
-	}
+        void draw(Pixmap pixmap);
+    }
 }

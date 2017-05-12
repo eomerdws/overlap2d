@@ -18,7 +18,6 @@
 
 package com.commons.color;
 
-import com.kotcrab.vis.ui.VisUI;
 import com.kotcrab.vis.ui.i18n.BundleText;
 
 /**
@@ -38,7 +37,9 @@ public enum ColorPickerText implements BundleText {
 
     @Override
     public String get () {
-        return VisUI.getColorPickerBundle().get(getName());
+        // TODO: Implement something to replace this. Look at the source jar for 0.9.2
+        return "UPDATE CODE";
+        // return VisUI.getColorPickerBundle().get(getName());
     }
 
     @Override
