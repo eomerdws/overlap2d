@@ -21,9 +21,10 @@ package com.uwsoft.editor.utils;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.utils.Align;
-import com.kotcrab.vis.ui.InputValidator;
+import com.kotcrab.vis.ui.util.InputValidator;
 import com.kotcrab.vis.ui.VisUI;
-import com.kotcrab.vis.ui.widget.NumberSelector;
+import com.kotcrab.vis.ui.widget.spinner.IntSpinnerModel;
+import com.kotcrab.vis.ui.widget.spinner.Spinner;
 import com.kotcrab.vis.ui.widget.VisLabel;
 import com.kotcrab.vis.ui.widget.VisTextField;
 import com.kotcrab.vis.ui.widget.VisValidatableTextField;
@@ -110,16 +111,12 @@ public class StandardWidgetsFactory {
         return visTextField;
     }
 
-    public static NumberSelector createNumberSelector(int min, int max) {
-        return createNumberSelector("default", min, max);
+    public static Spinner CreateSpinner(IntSpinnerModel spinnerModel) {
+        return CreateSpinner("default", spinnerModel);
     }
 
-    public static NumberSelector createNumberSelector(String style, int min, int max) {
-        return createNumberSelector(style, 0, min, max, 1);
-    }
-
-    public static NumberSelector createNumberSelector(String style, int initialValue, int min, int max, int step) {
-        NumberSelector selector = new NumberSelector(style, "", initialValue, min, max, step);
+    public static Spinner CreateSpinner(String style, IntSpinnerModel spinnerModel) {
+        Spinner selector = new Spinner(style, "", spinnerModel);
         return selector;
     }
 }
