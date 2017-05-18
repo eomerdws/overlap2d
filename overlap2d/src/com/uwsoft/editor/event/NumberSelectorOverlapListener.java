@@ -38,4 +38,4 @@
 //         facade.sendNotification(eventName, number);
 //     }
 // }
-// TODO: This does not appear to be used anywhere. VERIFY!
+// TODO: This does not appear to be used anywhere except one test case. VERIFY!

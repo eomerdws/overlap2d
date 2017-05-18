@@ -18,6 +18,7 @@
 
 package com.commons.color;
 
+import com.kotcrab.vis.ui.VisUI;
 import com.kotcrab.vis.ui.i18n.BundleText;
 
 /**
