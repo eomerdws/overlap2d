@@ -45,10 +45,7 @@ public class BootstrapPlugins extends SimpleCommand {
         facade.registerProxy(pluginManager);
 
         ProjectManager projectManager = facade.retrieveProxy(ProjectManager.NAME);
-        // File pluginDir = new File(projectManager.getRootPath() + File.separator + "plugins");
-        System.out.println("File Separator: " + File.separator);
-        System.out.println("Root Path: " + projectManager.getRootPath());
-        File pluginDir = new File("C:/Users/cts-prog7/Documents/SILPNG/LPB/build/classes/");
+        File pluginDir = new File(projectManager.getRootPath() + File.separator + "plugins");
         ModuleManager manager = new DefaultModuleManager();
         Collection<Module> loadedPlugins = manager.loadModules(pluginDir);
 
