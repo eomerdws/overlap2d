@@ -54,6 +54,7 @@ public class InputFileWidget extends VisTable {
     private void initFileChooser(FileChooser.Mode mode, FileChooser.SelectionMode selectionMode, boolean multiselectionEnabled) {
         fileChooser = new FileChooser(mode);
         fileChooser.setSelectionMode(selectionMode);
+        fileChooser.setDefaultPrefsName("filechooser");
         fileChooser.setMultiSelectionEnabled(multiselectionEnabled);
         fileChooser.setListener(new InputFileWidgetFileChooserListener());
     }
