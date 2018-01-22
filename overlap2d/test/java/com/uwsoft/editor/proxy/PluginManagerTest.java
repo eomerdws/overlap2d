@@ -2,6 +2,7 @@ package com.uwsoft.editor.proxy;
 
 import com.commons.plugins.O2DPlugin;
 import com.commons.plugins.PluginAPI;
+import com.sun.webkit.plugin.PluginManager;
 import com.uwsoft.editor.view.stage.Sandbox;
 import org.junit.Before;
 import org.junit.Test;
